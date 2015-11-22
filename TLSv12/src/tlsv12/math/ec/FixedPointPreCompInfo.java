@@ -3,8 +3,7 @@ package tlsv12.math.ec;
 /**
  * Class holding precomputation data for fixed-point multiplications.
  */
-public class FixedPointPreCompInfo implements PreCompInfo
-{
+public class FixedPointPreCompInfo implements PreCompInfo {
     /**
      * Array holding the precomputed <code>ECPoint</code>s used for a fixed
      * point multiplication.
@@ -18,23 +17,23 @@ public class FixedPointPreCompInfo implements PreCompInfo
      */
     protected int width = -1;
 
-    public ECPoint[] getPreComp()
-    {
+
+    public ECPoint[] getPreComp() {
         return preComp;
     }
 
-    public void setPreComp(ECPoint[] preComp)
-    {
+
+    public void setPreComp(ECPoint[] preComp) {
         this.preComp = preComp;
     }
 
-    public int getWidth()
-    {
+
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width)
-    {
+
+    public void setWidth(int width) {
         this.width = width;
     }
 }

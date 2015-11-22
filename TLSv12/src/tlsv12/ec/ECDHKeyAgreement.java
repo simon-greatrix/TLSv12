@@ -8,17 +8,17 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.ECPrivateKey;
 import java.security.interfaces.ECPublicKey;
 
-
-
 public class ECDHKeyAgreement extends KeyAgreementSpi {
-    
+
     public ECDHKeyAgreement(ECPrivateKey privateKey) throws InvalidKeyException {
         engineInit(privateKey);
     }
 
+
     public void doPhase(ECPublicKey peerPublicKey) throws GeneralSecurityException {
-        engineDoPhase(peerPublicKey,true);
+        engineDoPhase(peerPublicKey, true);
     }
+
 
     public SecretKey generateSecret(String string) throws NoSuchAlgorithmException {
         return engineGenerateSecret(string);

@@ -6,77 +6,60 @@ import tlsv12.util.Strings;
 import java.io.IOException;
 
 /**
- * DER NumericString object - this is an ascii string of characters {0,1,2,3,4,5,6,7,8,9, }.
+ * DER NumericString object - this is an ascii string of characters
+ * {0,1,2,3,4,5,6,7,8,9, }.
  */
-public class DERNumericString
-    extends ASN1Primitive
-    implements ASN1String
-{
-    private byte[]  string;
+public class DERNumericString extends ASN1Primitive implements ASN1String {
+    private byte[] string;
 
-    
-
-    
 
     /**
      * basic constructor - with bytes.
      */
-    DERNumericString(
-        byte[]   string)
-    {
+    DERNumericString(byte[] string) {
         this.string = string;
     }
 
-    
 
-    
-
-    public String getString()
-    {
+    public String getString() {
         return Strings.fromByteArray(string);
     }
 
-    public String toString()
-    {
+
+    public String toString() {
         return getString();
     }
 
-    
 
-    boolean isConstructed()
-    {
+    boolean isConstructed() {
         return false;
     }
 
-    int encodedLength()
-    {
-        return 1 + StreamUtil.calculateBodyLength(string.length) + string.length;
+
+    int encodedLength() {
+        return 1 + StreamUtil.calculateBodyLength(string.length)
+                + string.length;
     }
 
-    void encode(
-        ASN1OutputStream out)
-        throws IOException
-    {
+
+    void encode(ASN1OutputStream out) throws IOException {
         out.writeEncoded(BERTags.NUMERIC_STRING, string);
     }
 
-    public int hashCode()
-    {
+
+    public int hashCode() {
         return Arrays.hashCode(string);
     }
 
-    boolean asn1Equals(
-        ASN1Primitive o)
-    {
-        if (!(o instanceof DERNumericString))
-        {
+
+    boolean asn1Equals(ASN1Primitive o) {
+        if( !(o instanceof DERNumericString) ) {
             return false;
         }
 
-        DERNumericString  s = (DERNumericString)o;
+        DERNumericString s = (DERNumericString) o;
 
         return Arrays.areEqual(string, s.string);
     }
 
-    
 }

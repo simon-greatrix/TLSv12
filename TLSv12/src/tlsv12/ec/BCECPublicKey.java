@@ -1,18 +1,15 @@
 package tlsv12.ec;
 
-import tlsv12.math.ec.ECCurve;
-
-import tlsv12.crypto.params.ECDomainParameters;
-import tlsv12.crypto.params.ECPublicKeyParameters;
+import tlsv12.asn1.ASN1OctetString;
+import tlsv12.asn1.x509.AlgorithmIdentifier;
+import tlsv12.asn1.x509.SubjectPublicKeyInfo;
 import tlsv12.asn1.x9.X962Parameters;
 import tlsv12.asn1.x9.X9ECParameters;
 import tlsv12.asn1.x9.X9ECPoint;
 import tlsv12.asn1.x9.X9ObjectIdentifiers;
-import tlsv12.asn1.x509.AlgorithmIdentifier;
-import tlsv12.asn1.x509.SubjectPublicKeyInfo;
-import tlsv12.asn1.ASN1Encodable;
-import tlsv12.asn1.ASN1OctetString;
-import tlsv12.asn1.DERNull;
+import tlsv12.crypto.params.ECDomainParameters;
+import tlsv12.crypto.params.ECPublicKeyParameters;
+import tlsv12.math.ec.ECCurve;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -73,20 +70,19 @@ public class BCECPublicKey implements ECPublicKey {
         X962Parameters params;
         SubjectPublicKeyInfo info;
 
-            ECCurve curve = EC5Util.convertCurve(ecSpec.getCurve());
+        ECCurve curve = EC5Util.convertCurve(ecSpec.getCurve());
 
-            X9ECParameters ecP = new X9ECParameters(curve,
-                    EC5Util.convertPoint(curve, ecSpec.getGenerator()), ecSpec.getOrder(),
-                    BigInteger.valueOf(ecSpec.getCofactor()),
-                    ecSpec.getCurve().getSeed());
+        X9ECParameters ecP = new X9ECParameters(curve, EC5Util.convertPoint(
+                curve, ecSpec.getGenerator()), ecSpec.getOrder(),
+                BigInteger.valueOf(ecSpec.getCofactor()),
+                ecSpec.getCurve().getSeed());
 
-            params = new X962Parameters(ecP);
+        params = new X962Parameters(ecP);
 
         curve = this.engineGetQ().getCurve();
         ASN1OctetString p = (ASN1OctetString) new X9ECPoint(curve.createPoint(
-                    this.getQ().getAffineXCoord().toBigInteger(),
-                    this.getQ().getAffineYCoord().toBigInteger(),
-                    false)).toASN1Primitive();
+                this.getQ().getAffineXCoord().toBigInteger(),
+                this.getQ().getAffineYCoord().toBigInteger(), false)).toASN1Primitive();
 
         info = new SubjectPublicKeyInfo(new AlgorithmIdentifier(
                 X9ObjectIdentifiers.id_ecPublicKey, params), p.getOctets());

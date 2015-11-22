@@ -5,34 +5,29 @@ import java.io.IOException;
 /**
  * A NULL object.
  */
-public class DERNull
-    extends ASN1Null
-{
+public class DERNull extends ASN1Null {
     public static final DERNull INSTANCE = new DERNull();
 
-    private static final byte[]  zeroBytes = new byte[0];
+    private static final byte[] zeroBytes = new byte[0];
+
 
     /**
      * @deprecated use DERNull.INSTANCE
      */
-    public DERNull()
-    {
-    }
+    public DERNull() {}
 
-    boolean isConstructed()
-    {
+
+    boolean isConstructed() {
         return false;
     }
 
-    int encodedLength()
-    {
+
+    int encodedLength() {
         return 2;
     }
 
-    void encode(
-        ASN1OutputStream out)
-        throws IOException
-    {
+
+    void encode(ASN1OutputStream out) throws IOException {
         out.writeEncoded(BERTags.NULL, zeroBytes);
     }
 }

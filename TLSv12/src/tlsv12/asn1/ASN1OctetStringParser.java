@@ -5,9 +5,8 @@ import java.io.InputStream;
 /**
  * A basic parser for an OCTET STRING object
  */
-public interface ASN1OctetStringParser
-    extends ASN1Encodable, InMemoryRepresentable
-{
+public interface ASN1OctetStringParser extends ASN1Encodable,
+        InMemoryRepresentable {
     /**
      * Return the content of the OCTET STRING as an InputStream.
      *

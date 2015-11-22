@@ -76,7 +76,6 @@ public class EC5Util {
 
     public static tlsv12.math.ec.ECPoint convertPoint(ECCurve curve,
             ECPoint point) {
-        return curve.createPoint(point.getAffineX(), point.getAffineY(),
-                false);
+        return curve.createPoint(point.getAffineX(), point.getAffineY(), false);
     }
 }

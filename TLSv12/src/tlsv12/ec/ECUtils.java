@@ -26,7 +26,6 @@ package tlsv12.ec;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.GeneralSecurityException;
 import java.security.spec.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -523,22 +522,24 @@ public class ECUtils {
     }
 
 
-    public static java.security.spec.ECParameterSpec getECParameterSpec(String namedCurveOid) {
+    public static java.security.spec.ECParameterSpec getECParameterSpec(
+            String namedCurveOid) {
         return oidToEC.get(namedCurveOid);
     }
 
 
-    public static String getNamedCurveOid(java.security.spec.ECParameterSpec params) {
+    public static String getNamedCurveOid(
+            java.security.spec.ECParameterSpec params) {
         return ecToOID.get(params);
     }
 
 
     public static ECPoint decodePoint(byte[] data, EllipticCurve curve) throws IOException {
-        if ((data.length == 0) || (data[0] != 4)) {
+        if( (data.length == 0) || (data[0] != 4) ) {
             throw new IOException("Only uncompressed point format supported");
         }
-        int n = (curve.getField().getFieldSize() + 7 ) >> 3;
-        if (data.length != (n * 2) + 1) {
+        int n = (curve.getField().getFieldSize() + 7) >> 3;
+        if( data.length != (n * 2) + 1 ) {
             throw new IOException("Point does not match field size");
         }
         byte[] xb = new byte[n];
@@ -568,9 +569,9 @@ public class ECUtils {
         int n = (curve.getField().getFieldSize() + 7) >> 3;
         byte[] xb = trimZeroes(point.getAffineX().toByteArray());
         byte[] yb = trimZeroes(point.getAffineY().toByteArray());
-        if ((xb.length > n) || (yb.length > n)) {
-            throw new RuntimeException
-                ("Point coordinates do not match field size");
+        if( (xb.length > n) || (yb.length > n) ) {
+            throw new RuntimeException(
+                    "Point coordinates do not match field size");
         }
         byte[] b = new byte[1 + (n << 1)];
         b[0] = 4; // uncompressed
@@ -595,13 +596,13 @@ class NamedCurve {
     String oid_;
 
 
-    NamedCurve(String name, String soid, int type, String sfield,
-            String a, String b, String x, String y, String n, int h) {
+    NamedCurve(String name, String soid, int type, String sfield, String a,
+            String b, String x, String y, String n, int h) {
         BigInteger p = bi(sfield);
         ECField field;
-        if ((type == 1) || (type == 5)) {
+        if( (type == 1) || (type == 5) ) {
             field = new ECFieldFp(p);
-        } else if ((type == 2) || (type == 6)) {
+        } else if( (type == 2) || (type == 6) ) {
             field = new ECFieldF2m(p.bitLength() - 1, p);
         } else {
             throw new RuntimeException("Invalid type: " + type);
@@ -609,7 +610,7 @@ class NamedCurve {
 
         EllipticCurve curve = new EllipticCurve(field, bi(a), bi(b));
         ECPoint g = new ECPoint(bi(x), bi(y));
-        spec_ = new java.security.spec.ECParameterSpec(curve,g,bi(n),h);
+        spec_ = new java.security.spec.ECParameterSpec(curve, g, bi(n), h);
         oid_ = soid;
     }
 
@@ -617,9 +618,6 @@ class NamedCurve {
     public String getOID() {
         return oid_;
     }
-
-
-    
 
 
     public java.security.spec.ECParameterSpec getSpec() {

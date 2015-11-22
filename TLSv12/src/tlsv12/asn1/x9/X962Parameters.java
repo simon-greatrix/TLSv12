@@ -1,23 +1,21 @@
 package tlsv12.asn1.x9;
 
-import tlsv12.asn1.*;
+import tlsv12.asn1.ASN1Choice;
+import tlsv12.asn1.ASN1Object;
+import tlsv12.asn1.ASN1Primitive;
 
-public class X962Parameters
-    extends ASN1Object
-    implements ASN1Choice
-{
-    private ASN1Primitive           params = null;
+public class X962Parameters extends ASN1Object implements ASN1Choice {
+    private ASN1Primitive params = null;
 
-    public X962Parameters(
-        X9ECParameters      ecParameters)
-    {
+
+    public X962Parameters(X9ECParameters ecParameters) {
         this.params = ecParameters.toASN1Primitive();
     }
 
-    
 
     /**
      * Produce an object suitable for an ASN1OutputStream.
+     * 
      * <pre>
      * Parameters ::= CHOICE {
      *    ecParameters ECParameters,
@@ -26,8 +24,7 @@ public class X962Parameters
      * }
      * </pre>
      */
-    public ASN1Primitive toASN1Primitive()
-    {
-        return (ASN1Primitive)params;
+    public ASN1Primitive toASN1Primitive() {
+        return (ASN1Primitive) params;
     }
 }

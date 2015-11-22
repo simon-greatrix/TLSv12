@@ -1,9 +1,8 @@
 package tlsv12.crypto.agreement;
 
-import tlsv12.math.ec.ECPoint;
-
 import tlsv12.crypto.params.ECPrivateKeyParameters;
 import tlsv12.crypto.params.ECPublicKeyParameters;
+import tlsv12.math.ec.ECPoint;
 
 import java.math.BigInteger;
 

@@ -3,7 +3,6 @@ package tlsv12.asn1;
 import tlsv12.util.Arrays;
 
 import java.io.IOException;
-import java.math.BigInteger;
 
 /**
  * Class representing the ASN.1 ENUMERATED type.

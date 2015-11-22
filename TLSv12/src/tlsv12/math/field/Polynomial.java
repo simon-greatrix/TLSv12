@@ -1,12 +1,12 @@
 package tlsv12.math.field;
 
-public interface Polynomial
-{
+public interface Polynomial {
     int getDegree();
 
-//    BigInteger[] getCoefficients();
+
+    // BigInteger[] getCoefficients();
 
     int[] getExponentsPresent();
 
-//    Term[] getNonZeroTerms();
+    // Term[] getNonZeroTerms();
 }

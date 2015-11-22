@@ -29,7 +29,6 @@ public class KeyAgreementSpi {
     private ECDHBasicAgreement agreement;
 
 
-
     public KeyAgreementSpi() {
         this.kaAlgorithm = "ECDH";
         this.agreement = new ECDHBasicAgreement();

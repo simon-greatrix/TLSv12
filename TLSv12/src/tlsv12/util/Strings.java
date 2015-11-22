@@ -1,11 +1,5 @@
 package tlsv12.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Vector;
-
 public final class Strings {
     public static String fromUTF8ByteArray(byte[] bytes) {
         int i = 0;
@@ -66,12 +60,6 @@ public final class Strings {
     }
 
 
-    
-
-
-    
-
-
     /**
      * A locale independent version of toUpperCase.
      * 
@@ -124,9 +112,6 @@ public final class Strings {
 
         return string;
     }
-
-
-    
 
 
     /**

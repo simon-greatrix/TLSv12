@@ -1,11 +1,10 @@
 package tlsv12.math.ec;
 
 /**
- * Class holding precomputation data for the WTNAF (Window
- * <code>&tau;</code>-adic Non-Adjacent Form) algorithm.
+ * Class holding precomputation data for the WTNAF (Window <code>&tau;</code>
+ * -adic Non-Adjacent Form) algorithm.
  */
-public class WTauNafPreCompInfo implements PreCompInfo
-{
+public class WTauNafPreCompInfo implements PreCompInfo {
     /**
      * Array holding the precomputed <code>ECPoint.F2m</code>s used for the
      * WTNAF multiplication in <code>
@@ -14,13 +13,13 @@ public class WTauNafPreCompInfo implements PreCompInfo
      */
     protected ECPoint.F2m[] preComp = null;
 
-    public ECPoint.F2m[] getPreComp()
-    {
+
+    public ECPoint.F2m[] getPreComp() {
         return preComp;
     }
 
-    public void setPreComp(ECPoint.F2m[] preComp)
-    {
+
+    public void setPreComp(ECPoint.F2m[] preComp) {
         this.preComp = preComp;
     }
 }

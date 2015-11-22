@@ -8,75 +8,57 @@ import java.io.IOException;
 /**
  * DER PrintableString object.
  */
-public class DERPrintableString
-    extends ASN1Primitive
-    implements ASN1String
-{
-    private byte[]  string;
+public class DERPrintableString extends ASN1Primitive implements ASN1String {
+    private byte[] string;
 
-    
-
-    
 
     /**
      * basic constructor - byte encoded string.
      */
-    DERPrintableString(
-        byte[]   string)
-    {
+    DERPrintableString(byte[] string) {
         this.string = string;
     }
 
-    
 
-    
-
-    public String getString()
-    {
+    public String getString() {
         return Strings.fromByteArray(string);
     }
 
-    
 
-    boolean isConstructed()
-    {
+    boolean isConstructed() {
         return false;
     }
 
-    int encodedLength()
-    {
-        return 1 + StreamUtil.calculateBodyLength(string.length) + string.length;
+
+    int encodedLength() {
+        return 1 + StreamUtil.calculateBodyLength(string.length)
+                + string.length;
     }
 
-    void encode(
-        ASN1OutputStream out)
-        throws IOException
-    {
+
+    void encode(ASN1OutputStream out) throws IOException {
         out.writeEncoded(BERTags.PRINTABLE_STRING, string);
     }
 
-    public int hashCode()
-    {
+
+    public int hashCode() {
         return Arrays.hashCode(string);
     }
 
-    boolean asn1Equals(
-        ASN1Primitive o)
-    {
-        if (!(o instanceof DERPrintableString))
-        {
+
+    boolean asn1Equals(ASN1Primitive o) {
+        if( !(o instanceof DERPrintableString) ) {
             return false;
         }
 
-        DERPrintableString  s = (DERPrintableString)o;
+        DERPrintableString s = (DERPrintableString) o;
 
         return Arrays.areEqual(string, s.string);
     }
 
-    public String toString()
-    {
+
+    public String toString() {
         return getString();
     }
 
-    
 }

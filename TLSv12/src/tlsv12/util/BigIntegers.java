@@ -1,7 +1,6 @@
 package tlsv12.util;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
 
 /**
  * BigInteger utilities.

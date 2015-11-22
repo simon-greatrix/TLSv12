@@ -1,15 +1,14 @@
 package tlsv12.ec;
 
-import tlsv12.math.ec.ECCurve;
-import tlsv12.math.ec.ECPoint;
-
-import tlsv12.util.Integers;
 import tlsv12.crypto.AsymmetricCipherKeyPair;
 import tlsv12.crypto.generators.ECKeyPairGenerator;
 import tlsv12.crypto.params.ECDomainParameters;
 import tlsv12.crypto.params.ECKeyGenerationParameters;
 import tlsv12.crypto.params.ECPrivateKeyParameters;
 import tlsv12.crypto.params.ECPublicKeyParameters;
+import tlsv12.math.ec.ECCurve;
+import tlsv12.math.ec.ECPoint;
+import tlsv12.util.Integers;
 
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
@@ -20,9 +19,8 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
 import java.util.Hashtable;
 
-public abstract class KeyPairGeneratorSpi  {
-    public KeyPairGeneratorSpi(String algorithmName) {
-    }
+public abstract class KeyPairGeneratorSpi {
+    public KeyPairGeneratorSpi(String algorithmName) {}
 
     public static class EC extends KeyPairGeneratorSpi {
         ECKeyGenerationParameters param;
@@ -111,12 +109,12 @@ public abstract class KeyPairGeneratorSpi  {
             ECPublicKeyParameters pub = pair.getPublic();
             ECPrivateKeyParameters priv = pair.getPrivate();
 
-                java.security.spec.ECParameterSpec p = (java.security.spec.ECParameterSpec) ecParams;
+            java.security.spec.ECParameterSpec p = (java.security.spec.ECParameterSpec) ecParams;
 
-                BCECPublicKey pubKey = new BCECPublicKey(algorithm, pub, p);
+            BCECPublicKey pubKey = new BCECPublicKey(algorithm, pub, p);
 
-                return new KeyPair(pubKey, new BCECPrivateKey(algorithm, priv,
-                        pubKey, p));
+            return new KeyPair(pubKey, new BCECPrivateKey(algorithm, priv,
+                    pubKey, p));
         }
 
 

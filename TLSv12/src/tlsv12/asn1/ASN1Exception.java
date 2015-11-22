@@ -2,24 +2,22 @@ package tlsv12.asn1;
 
 import java.io.IOException;
 
-public class ASN1Exception
-    extends IOException
-{
+public class ASN1Exception extends IOException {
     private Throwable cause;
 
-    ASN1Exception(String message)
-    {
+
+    ASN1Exception(String message) {
         super(message);
     }
 
-    ASN1Exception(String message, Throwable cause)
-    {
+
+    ASN1Exception(String message, Throwable cause) {
         super(message);
         this.cause = cause;
     }
 
-    public Throwable getCause()
-    {
+
+    public Throwable getCause() {
         return cause;
     }
 }

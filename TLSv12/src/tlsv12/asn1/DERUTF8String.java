@@ -8,67 +8,56 @@ import java.io.IOException;
 /**
  * DER UTF8String object.
  */
-public class DERUTF8String
-    extends ASN1Primitive
-    implements ASN1String
-{
-    private byte[]  string;
+public class DERUTF8String extends ASN1Primitive implements ASN1String {
+    private byte[] string;
 
-    
-
-    
 
     /**
      * Basic constructor - byte encoded string.
      */
-    DERUTF8String(byte[] string)
-    {
+    DERUTF8String(byte[] string) {
         this.string = string;
     }
 
-    
 
-    public String getString()
-    {
+    public String getString() {
         return Strings.fromUTF8ByteArray(string);
     }
 
-    public String toString()
-    {
+
+    public String toString() {
         return getString();
     }
 
-    public int hashCode()
-    {
+
+    public int hashCode() {
         return Arrays.hashCode(string);
     }
 
-    boolean asn1Equals(ASN1Primitive o)
-    {
-        if (!(o instanceof DERUTF8String))
-        {
+
+    boolean asn1Equals(ASN1Primitive o) {
+        if( !(o instanceof DERUTF8String) ) {
             return false;
         }
 
-        DERUTF8String s = (DERUTF8String)o;
+        DERUTF8String s = (DERUTF8String) o;
 
         return Arrays.areEqual(string, s.string);
     }
 
-    boolean isConstructed()
-    {
+
+    boolean isConstructed() {
         return false;
     }
 
-    int encodedLength()
-        throws IOException
-    {
-        return 1 + StreamUtil.calculateBodyLength(string.length) + string.length;
+
+    int encodedLength() throws IOException {
+        return 1 + StreamUtil.calculateBodyLength(string.length)
+                + string.length;
     }
 
-    void encode(ASN1OutputStream out)
-        throws IOException
-    {
+
+    void encode(ASN1OutputStream out) throws IOException {
         out.writeEncoded(BERTags.UTF8_STRING, string);
     }
 }

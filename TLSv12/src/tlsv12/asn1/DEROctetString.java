@@ -2,36 +2,29 @@ package tlsv12.asn1;
 
 import java.io.IOException;
 
-public class DEROctetString
-    extends ASN1OctetString
-{
+public class DEROctetString extends ASN1OctetString {
     /**
-     * @param string the octets making up the octet string.
+     * @param string
+     *            the octets making up the octet string.
      */
-    public DEROctetString(
-        byte[]  string)
-    {
+    public DEROctetString(byte[] string) {
         super(string);
     }
 
-    
 
-    boolean isConstructed()
-    {
+    boolean isConstructed() {
         return false;
     }
 
-    int encodedLength()
-    {
-        return 1 + StreamUtil.calculateBodyLength(string.length) + string.length;
+
+    int encodedLength() {
+        return 1 + StreamUtil.calculateBodyLength(string.length)
+                + string.length;
     }
 
-    void encode(
-        ASN1OutputStream out)
-        throws IOException
-    {
+
+    void encode(ASN1OutputStream out) throws IOException {
         out.writeEncoded(BERTags.OCTET_STRING, string);
     }
 
-    
 }

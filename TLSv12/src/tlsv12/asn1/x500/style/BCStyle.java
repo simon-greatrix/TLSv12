@@ -1,166 +1,190 @@
 package tlsv12.asn1.x500.style;
 
+import tlsv12.asn1.ASN1Encodable;
+import tlsv12.asn1.ASN1ObjectIdentifier;
 import tlsv12.asn1.x500.AttributeTypeAndValue;
 import tlsv12.asn1.x500.RDN;
 import tlsv12.asn1.x500.X500Name;
 
-import tlsv12.asn1.*;
-
 import java.util.Hashtable;
 
-public class BCStyle
-{
-    
+public class BCStyle {
+
     //
     // pkcs-9 OBJECT IDENTIFIER ::= {
-    //       iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) 9 }
+    // iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) 9 }
     //
     /** PKCS#9: 1.2.840.113549.1.9 */
-    private static final ASN1ObjectIdentifier    pkcs_9                  = new ASN1ObjectIdentifier("1.2.840.113549.1.9");
+    private static final ASN1ObjectIdentifier pkcs_9 = new ASN1ObjectIdentifier(
+            "1.2.840.113549.1.9");
 
     /** PKCS#9: 1.2.840.113549.1.9.1 */
-    private static final ASN1ObjectIdentifier    pkcs_9_at_emailAddress        = pkcs_9.branch("1");
+    private static final ASN1ObjectIdentifier pkcs_9_at_emailAddress = pkcs_9.branch("1");
+
     /** PKCS#9: 1.2.840.113549.1.9.2 */
-    private static final ASN1ObjectIdentifier    pkcs_9_at_unstructuredName    = pkcs_9.branch("2");
+    private static final ASN1ObjectIdentifier pkcs_9_at_unstructuredName = pkcs_9.branch("2");
+
     /** PKCS#9: 1.2.840.113549.1.9.8 */
-    private static final ASN1ObjectIdentifier    pkcs_9_at_unstructuredAddress = pkcs_9.branch("8");
+    private static final ASN1ObjectIdentifier pkcs_9_at_unstructuredAddress = pkcs_9.branch("8");
 
     /**
      * country code - StringType(SIZE(2))
      */
-    public static final ASN1ObjectIdentifier C = new ASN1ObjectIdentifier("2.5.4.6");
+    public static final ASN1ObjectIdentifier C = new ASN1ObjectIdentifier(
+            "2.5.4.6");
 
     /**
      * organization - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier O = new ASN1ObjectIdentifier("2.5.4.10");
+    public static final ASN1ObjectIdentifier O = new ASN1ObjectIdentifier(
+            "2.5.4.10");
 
     /**
      * organizational unit name - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier OU = new ASN1ObjectIdentifier("2.5.4.11");
+    public static final ASN1ObjectIdentifier OU = new ASN1ObjectIdentifier(
+            "2.5.4.11");
 
     /**
      * Title
      */
-    public static final ASN1ObjectIdentifier T = new ASN1ObjectIdentifier("2.5.4.12");
+    public static final ASN1ObjectIdentifier T = new ASN1ObjectIdentifier(
+            "2.5.4.12");
 
     /**
      * common name - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier CN = new ASN1ObjectIdentifier("2.5.4.3");
+    public static final ASN1ObjectIdentifier CN = new ASN1ObjectIdentifier(
+            "2.5.4.3");
 
     /**
      * device serial number name - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier SN = new ASN1ObjectIdentifier("2.5.4.5");
+    public static final ASN1ObjectIdentifier SN = new ASN1ObjectIdentifier(
+            "2.5.4.5");
 
     /**
      * street - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier STREET = new ASN1ObjectIdentifier("2.5.4.9");
+    public static final ASN1ObjectIdentifier STREET = new ASN1ObjectIdentifier(
+            "2.5.4.9");
 
     /**
      * locality name - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier L = new ASN1ObjectIdentifier("2.5.4.7");
+    public static final ASN1ObjectIdentifier L = new ASN1ObjectIdentifier(
+            "2.5.4.7");
 
     /**
      * state, or province name - StringType(SIZE(1..64))
      */
-    public static final ASN1ObjectIdentifier ST = new ASN1ObjectIdentifier("2.5.4.8");
+    public static final ASN1ObjectIdentifier ST = new ASN1ObjectIdentifier(
+            "2.5.4.8");
 
     /**
      * Naming attributes of type X520name
      */
-    public static final ASN1ObjectIdentifier SURNAME = new ASN1ObjectIdentifier("2.5.4.4");
-    public static final ASN1ObjectIdentifier GIVENNAME = new ASN1ObjectIdentifier("2.5.4.42");
-    public static final ASN1ObjectIdentifier INITIALS = new ASN1ObjectIdentifier("2.5.4.43");
-    public static final ASN1ObjectIdentifier GENERATION = new ASN1ObjectIdentifier("2.5.4.44");
-    public static final ASN1ObjectIdentifier UNIQUE_IDENTIFIER = new ASN1ObjectIdentifier("2.5.4.45");
+    public static final ASN1ObjectIdentifier SURNAME = new ASN1ObjectIdentifier(
+            "2.5.4.4");
+
+    public static final ASN1ObjectIdentifier GIVENNAME = new ASN1ObjectIdentifier(
+            "2.5.4.42");
+
+    public static final ASN1ObjectIdentifier INITIALS = new ASN1ObjectIdentifier(
+            "2.5.4.43");
+
+    public static final ASN1ObjectIdentifier GENERATION = new ASN1ObjectIdentifier(
+            "2.5.4.44");
+
+    public static final ASN1ObjectIdentifier UNIQUE_IDENTIFIER = new ASN1ObjectIdentifier(
+            "2.5.4.45");
 
     /**
      * businessCategory - DirectoryString(SIZE(1..128)
      */
     public static final ASN1ObjectIdentifier BUSINESS_CATEGORY = new ASN1ObjectIdentifier(
-        "2.5.4.15");
+            "2.5.4.15");
 
     /**
      * postalCode - DirectoryString(SIZE(1..40)
      */
     public static final ASN1ObjectIdentifier POSTAL_CODE = new ASN1ObjectIdentifier(
-        "2.5.4.17");
+            "2.5.4.17");
 
     /**
      * dnQualifier - DirectoryString(SIZE(1..64)
      */
     public static final ASN1ObjectIdentifier DN_QUALIFIER = new ASN1ObjectIdentifier(
-        "2.5.4.46");
+            "2.5.4.46");
 
     /**
      * RFC 3039 Pseudonym - DirectoryString(SIZE(1..64)
      */
     public static final ASN1ObjectIdentifier PSEUDONYM = new ASN1ObjectIdentifier(
-        "2.5.4.65");
-
+            "2.5.4.65");
 
     /**
      * RFC 3039 DateOfBirth - GeneralizedTime - YYYYMMDD000000Z
      */
     public static final ASN1ObjectIdentifier DATE_OF_BIRTH = new ASN1ObjectIdentifier(
-        "1.3.6.1.5.5.7.9.1");
+            "1.3.6.1.5.5.7.9.1");
 
     /**
      * RFC 3039 PlaceOfBirth - DirectoryString(SIZE(1..128)
      */
     public static final ASN1ObjectIdentifier PLACE_OF_BIRTH = new ASN1ObjectIdentifier(
-        "1.3.6.1.5.5.7.9.2");
+            "1.3.6.1.5.5.7.9.2");
 
     /**
      * RFC 3039 Gender - PrintableString (SIZE(1)) -- "M", "F", "m" or "f"
      */
     public static final ASN1ObjectIdentifier GENDER = new ASN1ObjectIdentifier(
-        "1.3.6.1.5.5.7.9.3");
+            "1.3.6.1.5.5.7.9.3");
 
     /**
      * RFC 3039 CountryOfCitizenship - PrintableString (SIZE (2)) -- ISO 3166
      * codes only
      */
     public static final ASN1ObjectIdentifier COUNTRY_OF_CITIZENSHIP = new ASN1ObjectIdentifier(
-        "1.3.6.1.5.5.7.9.4");
+            "1.3.6.1.5.5.7.9.4");
 
     /**
      * RFC 3039 CountryOfResidence - PrintableString (SIZE (2)) -- ISO 3166
      * codes only
      */
     public static final ASN1ObjectIdentifier COUNTRY_OF_RESIDENCE = new ASN1ObjectIdentifier(
-        "1.3.6.1.5.5.7.9.5");
-
+            "1.3.6.1.5.5.7.9.5");
 
     /**
      * ISIS-MTT NameAtBirth - DirectoryString(SIZE(1..64)
      */
-    public static final ASN1ObjectIdentifier NAME_AT_BIRTH = new ASN1ObjectIdentifier("1.3.36.8.3.14");
+    public static final ASN1ObjectIdentifier NAME_AT_BIRTH = new ASN1ObjectIdentifier(
+            "1.3.36.8.3.14");
 
     /**
      * RFC 3039 PostalAddress - SEQUENCE SIZE (1..6) OF
      * DirectoryString(SIZE(1..30))
      */
-    public static final ASN1ObjectIdentifier POSTAL_ADDRESS = new ASN1ObjectIdentifier("2.5.4.16");
+    public static final ASN1ObjectIdentifier POSTAL_ADDRESS = new ASN1ObjectIdentifier(
+            "2.5.4.16");
 
     /**
      * id-at-telephoneNumber
      */
-    public static final ASN1ObjectIdentifier TELEPHONE_NUMBER = new ASN1ObjectIdentifier("2.5.4.20");
+    public static final ASN1ObjectIdentifier TELEPHONE_NUMBER = new ASN1ObjectIdentifier(
+            "2.5.4.20");
 
     /**
      * id-at-name
      */
-    public static final ASN1ObjectIdentifier NAME = new ASN1ObjectIdentifier("2.5.4.41");
+    public static final ASN1ObjectIdentifier NAME = new ASN1ObjectIdentifier(
+            "2.5.4.41");
 
     /**
      * Email address (RSA PKCS#9 extension) - IA5String.
-     * <p>Note: if you're trying to be ultra orthodox, don't use this! It shouldn't be in here.
+     * <p>
+     * Note: if you're trying to be ultra orthodox, don't use this! It shouldn't
+     * be in here.
      */
     public static final ASN1ObjectIdentifier EmailAddress = pkcs_9_at_emailAddress;
 
@@ -168,6 +192,7 @@ public class BCStyle
      * more from PKCS#9
      */
     public static final ASN1ObjectIdentifier UnstructuredName = pkcs_9_at_unstructuredName;
+
     public static final ASN1ObjectIdentifier UnstructuredAddress = pkcs_9_at_unstructuredAddress;
 
     /**
@@ -176,18 +201,20 @@ public class BCStyle
     public static final ASN1ObjectIdentifier E = EmailAddress;
 
     /*
-    * others...
-    */
-    public static final ASN1ObjectIdentifier DC = new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.25");
+     * others...
+     */
+    public static final ASN1ObjectIdentifier DC = new ASN1ObjectIdentifier(
+            "0.9.2342.19200300.100.1.25");
 
     /**
      * LDAP User id.
      */
-    public static final ASN1ObjectIdentifier UID = new ASN1ObjectIdentifier("0.9.2342.19200300.100.1.1");
+    public static final ASN1ObjectIdentifier UID = new ASN1ObjectIdentifier(
+            "0.9.2342.19200300.100.1.1");
 
     /**
-     * default look up table translating OID values into their common symbols following
-     * the convention in RFC 2253 with a few extras
+     * default look up table translating OID values into their common symbols
+     * following the convention in RFC 2253 with a few extras
      */
     private static final Hashtable DefaultSymbols = new Hashtable();
 
@@ -196,8 +223,7 @@ public class BCStyle
      */
     private static final Hashtable DefaultLookUp = new Hashtable();
 
-    static
-    {
+    static {
         DefaultSymbols.put(C, "C");
         DefaultSymbols.put(O, "O");
         DefaultSymbols.put(T, "T");
@@ -273,31 +299,28 @@ public class BCStyle
     public static final BCStyle INSTANCE = new BCStyle();
 
     protected final Hashtable defaultLookUp;
+
     protected final Hashtable defaultSymbols;
 
-    protected BCStyle()
-    {
+
+    protected BCStyle() {
         defaultSymbols = new Hashtable();
         defaultSymbols.putAll(DefaultSymbols);
         defaultLookUp = new Hashtable();
         defaultLookUp.putAll(DefaultLookUp);
     }
 
-    public String toString(X500Name name)
-    {
+
+    public String toString(X500Name name) {
         StringBuffer buf = new StringBuffer();
         boolean first = true;
 
         RDN[] rdns = name.getRDNs();
 
-        for (int i = 0; i < rdns.length; i++)
-        {
-            if (first)
-            {
+        for(int i = 0;i < rdns.length;i++) {
+            if( first ) {
                 first = false;
-            }
-            else
-            {
+            } else {
                 buf.append(',');
             }
 
@@ -307,96 +330,85 @@ public class BCStyle
         return buf.toString();
     }
 
+
     private int calcHashCode(ASN1Encodable enc) {
         String value = IETFUtils.valueToString(enc);
         value = IETFUtils.canonicalize(value);
         return value.hashCode();
     }
 
+
     public int calculateHashCode(X500Name name) {
         int hashCodeValue = 0;
         RDN[] rdns = name.getRDNs();
-    
+
         // this needs to be order independent, like equals
-        for (int i = 0; i != rdns.length; i++)
-        {
-            if (rdns[i].isMultiValued())
-            {
+        for(int i = 0;i != rdns.length;i++) {
+            if( rdns[i].isMultiValued() ) {
                 AttributeTypeAndValue[] atv = rdns[i].getTypesAndValues();
-    
-                for (int j = 0; j != atv.length; j++)
-                {
+
+                for(int j = 0;j != atv.length;j++) {
                     hashCodeValue ^= atv[j].getType().hashCode();
                     hashCodeValue ^= calcHashCode(atv[j].getValue());
                 }
-            }
-            else
-            {
+            } else {
                 hashCodeValue ^= rdns[i].getFirst().getType().hashCode();
                 hashCodeValue ^= calcHashCode(rdns[i].getFirst().getValue());
             }
         }
-    
+
         return hashCodeValue;
     }
+
 
     public boolean areEqual(X500Name name1, X500Name name2) {
         RDN[] rdns1 = name1.getRDNs();
         RDN[] rdns2 = name2.getRDNs();
-    
-        if (rdns1.length != rdns2.length)
-        {
+
+        if( rdns1.length != rdns2.length ) {
             return false;
         }
-    
+
         boolean reverse = false;
-    
-        if (rdns1[0].getFirst() != null && rdns2[0].getFirst() != null)
-        {
-            reverse = !rdns1[0].getFirst().getType().equals(rdns2[0].getFirst().getType());  // guess forward
+
+        if( rdns1[0].getFirst() != null && rdns2[0].getFirst() != null ) {
+            reverse = !rdns1[0].getFirst().getType().equals(
+                    rdns2[0].getFirst().getType()); // guess forward
         }
-    
-        for (int i = 0; i != rdns1.length; i++)
-        {
-            if (!foundMatch(reverse, rdns1[i], rdns2))
-            {
+
+        for(int i = 0;i != rdns1.length;i++) {
+            if( !foundMatch(reverse, rdns1[i], rdns2) ) {
                 return false;
             }
         }
-    
+
         return true;
     }
 
+
     private boolean foundMatch(boolean reverse, RDN rdn, RDN[] possRDNs) {
-        if (reverse)
-        {
-            for (int i = possRDNs.length - 1; i >= 0; i--)
-            {
-                if (possRDNs[i] != null && rdnAreEqual(rdn, possRDNs[i]))
-                {
+        if( reverse ) {
+            for(int i = possRDNs.length - 1;i >= 0;i--) {
+                if( possRDNs[i] != null && rdnAreEqual(rdn, possRDNs[i]) ) {
+                    possRDNs[i] = null;
+                    return true;
+                }
+            }
+        } else {
+            for(int i = 0;i != possRDNs.length;i++) {
+                if( possRDNs[i] != null && rdnAreEqual(rdn, possRDNs[i]) ) {
                     possRDNs[i] = null;
                     return true;
                 }
             }
         }
-        else
-        {
-            for (int i = 0; i != possRDNs.length; i++)
-            {
-                if (possRDNs[i] != null && rdnAreEqual(rdn, possRDNs[i]))
-                {
-                    possRDNs[i] = null;
-                    return true;
-                }
-            }
-        }
-    
+
         return false;
     }
+
 
     protected boolean rdnAreEqual(RDN rdn1, RDN rdn2) {
         return IETFUtils.rDNAreEqual(rdn1, rdn2);
     }
-
 
 }
