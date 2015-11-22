@@ -27,6 +27,10 @@ This list was chosen to meet the following requirements:
 
 Notably missing from the above list are ciphers using Galois Counter Mode, as Sun's cryptographic provider does not support them.
 
+You can test what a server supports using SSL Labs service at:
+
+https://www.ssllabs.com/ssltest/index.html
+
 The stand alone TLS library is derived from the OpenJDK v8 release, augmented with the Bouncy Castle Elliptic Curve crypotgraphic primitives.
 
 
