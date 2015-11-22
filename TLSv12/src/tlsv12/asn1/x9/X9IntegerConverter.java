@@ -1,18 +1,11 @@
 package tlsv12.asn1.x9;
 
-import tlsv12.math.ec.ECCurve;
 import tlsv12.math.ec.ECFieldElement;
 
 import java.math.BigInteger;
 
 public class X9IntegerConverter
 {
-    public int getByteLength(
-        ECCurve c)
-    {
-        return (c.getFieldSize() + 7) / 8;
-    }
-
     public int getByteLength(
         ECFieldElement fe)
     {

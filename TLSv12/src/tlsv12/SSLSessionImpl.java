@@ -27,7 +27,6 @@ package tlsv12;
 import javax.crypto.SecretKey;
 import javax.net.ssl.*;
 
-import java.net.InetAddress;
 import java.security.Principal;
 import java.security.PrivateKey;
 import java.security.SecureRandom;
@@ -458,9 +457,6 @@ final class SSLSessionImpl implements SSLSession {
     }
 
 
-    
-
-
     /**
      * Returns the identity of the peer which was established as part of
      * defining the session.
@@ -692,9 +688,6 @@ final class SSLSessionImpl implements SSLSession {
     public synchronized int getApplicationBufferSize() {
         return getPacketBufferSize() - Record.headerSize;
     }
-
-
-    
 
 
     /** Returns a string representation of this SSL session */

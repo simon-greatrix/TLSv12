@@ -73,6 +73,7 @@ final class SSLServerSocketImpl extends SSLServerSocket {
     /* which protocol to use by default */
     private ProtocolList enabledProtocols = null;
 
+
     /**
      * Create an SSL server socket on a port, using a non-default authentication
      * context and a specified connection backlog.

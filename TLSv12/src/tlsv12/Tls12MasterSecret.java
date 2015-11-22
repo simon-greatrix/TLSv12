@@ -238,6 +238,7 @@ public class Tls12MasterSecret {
 
         private byte[] key;
 
+
         TlsMasterSecretKey(byte[] key, int majorVersion, int minorVersion) {
             this.key = key;
         }

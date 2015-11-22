@@ -1,11 +1,10 @@
 package tlsv12.ec;
 
-import tlsv12.util.Strings;
 import tlsv12.crypto.agreement.ECDHBasicAgreement;
 import tlsv12.crypto.params.ECDomainParameters;
 import tlsv12.crypto.params.ECPrivateKeyParameters;
 import tlsv12.crypto.params.ECPublicKeyParameters;
-import tlsv12.asn1.x9.X9IntegerConverter;
+import tlsv12.util.BigIntegers;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,8 +20,6 @@ import java.security.NoSuchAlgorithmException;
  * Also, MQV key agreement per SEC-1
  */
 public class KeyAgreementSpi {
-    private static final X9IntegerConverter converter = new X9IntegerConverter();
-
     private String kaAlgorithm;
 
     private BigInteger result;
@@ -31,11 +28,6 @@ public class KeyAgreementSpi {
 
     private ECDHBasicAgreement agreement;
 
-
-    private byte[] bigIntToBytes(BigInteger r) {
-        return converter.integerToBytes(r,
-                converter.getByteLength(parameters.getCurve()));
-    }
 
 
     public KeyAgreementSpi() {
@@ -63,17 +55,9 @@ public class KeyAgreementSpi {
     }
 
 
-    
-
-
     protected SecretKey engineGenerateSecret(String algorithm) throws NoSuchAlgorithmException {
-        byte[] secret = bigIntToBytes(result);
-        Strings.toUpperCase(algorithm);
-        
-
-        // TODO
-
-        return new SecretKeySpec(secret, algorithm);
+        return new SecretKeySpec(BigIntegers.asUnsignedByteArray(
+                agreement.getFieldSize(), result), algorithm);
     }
 
 
