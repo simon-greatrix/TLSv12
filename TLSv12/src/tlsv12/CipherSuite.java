@@ -135,7 +135,9 @@ final class CipherSuite implements Comparable<CipherSuite> {
         this.keyExchange = keyExchange;
         this.cipher = cipher;
         this.exportable = cipher.exportable;
-        if( name.endsWith("_SHA256") ) {
+        if (name.endsWith("_SHA")) {
+            macAlg = M_SHA;
+        } else if( name.endsWith("_SHA256") ) {
             macAlg = M_SHA256;
         } else if( name.endsWith("_SHA384") ) {
             macAlg = M_SHA384;
@@ -292,6 +294,37 @@ final class CipherSuite implements Comparable<CipherSuite> {
             throw new RuntimeException("Duplicate ciphersuite definition: "
                     + id + ", " + name);
         }
+    }
+
+    /*
+     * Use this method when there is no upper protocol limit.  That is,
+     * suites which have not been obsoleted.
+     */
+    private static void add(String name, int id, int priority,
+            KeyExchange keyExchange, BulkCipher cipher, boolean allowed) {
+        add(name, id, priority, keyExchange,
+            cipher, allowed, ProtocolVersion.LIMIT_MAX_VALUE);
+    }
+
+    /*
+     * Use this method when there is no lower protocol limit where this
+     * suite can be used, and the PRF is P_SHA256.  That is, the
+     * existing ciphersuites.  From RFC 5246:
+     *
+     *     All cipher suites in this document use P_SHA256.
+     */
+    private static void add(String name, int id, int priority,
+            KeyExchange keyExchange, BulkCipher cipher,
+            boolean allowed, int obsoleted) {
+        // If this is an obsoleted suite, then don't let the TLS 1.2
+        // protocol have a valid PRF value.
+        PRF prf = P_SHA256;
+        if (obsoleted < ProtocolVersion.TLS12.v) {
+            prf = P_NONE;
+        }
+
+        add(name, id, priority, keyExchange, cipher, allowed, obsoleted,
+            ProtocolVersion.LIMIT_MIN_VALUE, prf);
     }
 
     /**
@@ -529,6 +562,8 @@ final class CipherSuite implements Comparable<CipherSuite> {
 
     // MACs
     final static MacAlg M_NULL = new MacAlg("NULL", 0, 0, 0);
+    
+    final static MacAlg M_SHA     = new MacAlg("SHA",     20,  64,   9);
 
     final static MacAlg M_SHA256 = new MacAlg("SHA256", 32, 64, 9);
 
@@ -838,7 +873,8 @@ final class CipherSuite implements Comparable<CipherSuite> {
                 B_AES_256, T, max, tls12, P_SHA256);
 
         add("TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA", 0xC00A);
-        add("TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA", 0xC014);
+        add("TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                0xC014, --p, K_ECDHE_RSA,   B_AES_256, T);
         add("TLS_RSA_WITH_AES_256_CBC_SHA", 0x0035);
         add("TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA", 0xC005);
         add("TLS_ECDH_RSA_WITH_AES_256_CBC_SHA", 0xC00F);
@@ -860,7 +896,8 @@ final class CipherSuite implements Comparable<CipherSuite> {
                 B_AES_128, T, max, tls12, P_SHA256);
 
         add("TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA", 0xC009);
-        add("TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA", 0xC013);
+        add("TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                0xC013, --p, K_ECDHE_RSA,   B_AES_128, T);
         add("TLS_RSA_WITH_AES_128_CBC_SHA", 0x002f);
         add("TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA", 0xC004);
         add("TLS_ECDH_RSA_WITH_AES_128_CBC_SHA", 0xC00E);

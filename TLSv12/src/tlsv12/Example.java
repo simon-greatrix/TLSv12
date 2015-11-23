@@ -24,8 +24,8 @@ public class Example {
 
 
     public static void main(String[] args) throws IOException {
-        // System.setProperty("javax.net.debug", "ssl");
-
+         System.setProperty("javax.net.debug", "ssl");
+/*
         System.out.println("Fetching from Google");
         HttpsURLConnection conn = Tls12Context.getConnection("https://www.google.com");
         fetchPage(conn);
@@ -37,9 +37,9 @@ public class Example {
         System.out.println("Fetching from Cybersource");
         conn = Tls12Context.getConnection("https://www.cybersource.com");
         fetchPage(conn);
-
+*/
         System.out.println("Fetching from Harte Hanks");
-        conn = Tls12Context.getConnection("https://www.hartehanks.com");
+        HttpsURLConnection conn = Tls12Context.getConnection("https://belk2-uat.hostedtax.thomsonreuters.com");
         fetchPage(conn);
     }
 

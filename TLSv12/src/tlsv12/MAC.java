@@ -25,6 +25,7 @@
 package tlsv12;
 
 import static tlsv12.CipherSuite.M_NULL;
+import static tlsv12.CipherSuite.M_SHA;
 import static tlsv12.CipherSuite.M_SHA256;
 import static tlsv12.CipherSuite.M_SHA384;
 
@@ -98,7 +99,9 @@ final class MAC {
         this.macSize = macAlg.size;
 
         String algorithm;
-        if( macAlg == M_SHA256 ) {
+        if (macAlg == M_SHA) {
+            algorithm = "HmacSHA1";
+        } else if( macAlg == M_SHA256 ) {
             algorithm = "HmacSHA256"; // TLS 1.2+
         } else if( macAlg == M_SHA384 ) {
             algorithm = "HmacSHA384"; // TLS 1.2+
