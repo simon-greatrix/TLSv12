@@ -1,9 +1,9 @@
 # TLSv12
-TLS 1.2 for Java 1.6
+TLS 1.2 for Java 1.5
 
 ## The stand alone version
 
-The "standalone" branch provides everything needed to run most TLSv1.2 connections with Java 1.6 where the server. The connection is limited to the following cipher suites:
+The "standalone" branch provides everything needed to run most TLSv1.2 connections with Java 1.5. The connection is limited to the following cipher suites:
 
 + TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
 + TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
